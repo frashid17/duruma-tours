@@ -20,24 +20,44 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        tourType: '',
-        numberOfPeople: '',
-        preferredDate: '',
-        message: ''
+
+    try {
+      const response = await fetch('http://localhost:3001', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'contact',
+          ...formData,
+        }),
       });
-    }, 3000);
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          tourType: '',
+          numberOfPeople: '',
+          preferredDate: '',
+          message: '',
+        });
+      }, 3000);
+    } catch (err) {
+      console.error('Contact form error:', err);
+      alert('There was an error sending your message. Please try again later.');
+    }
   };
+
 
   const contactInfo = [
     {
