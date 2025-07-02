@@ -119,7 +119,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="group relative overflow-hidden rounded-lg shadow-lg">
               <img 
-                src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4npFEgFGaczspcEQ-V2ikHqB_fT2XNf-5LUhJaoyQ7xdrT3KGIS-g0EwYZ4x9FRf4O5Lg54975DgQPOPChv6RdZIoi3CibhFQxRHypLzeIdjcKSmhPEGMRCLzldZ2-yPDEALNmXw=s1360-w1360-h1020-rw"
+                src="http://bit.ly/3I5Jayt"
                 alt="Maasai Mara"
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
               />
