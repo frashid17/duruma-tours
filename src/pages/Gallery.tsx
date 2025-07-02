@@ -19,7 +19,7 @@ const Gallery = () => {
     },
     {
       id: 3,
-      src: "https://images.pexels.com/photos/1271179/pexels-photo-1271179.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      src: "https://bit.ly/400jCJj",
       title: "Lion Pride",
       category: "Wildlife"
     },
@@ -31,7 +31,7 @@ const Gallery = () => {
     },
     {
       id: 5,
-      src: "https://images.pexels.com/photos/1271177/pexels-photo-1271177.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      src: "https://bit.ly/4nrEHGn",
       title: "Flamingos at Lake Nakuru",
       category: "Birds"
     },
