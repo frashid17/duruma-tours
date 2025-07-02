@@ -47,7 +47,7 @@ const Tours = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:3001', {
+      const response = await fetch('/.netlify/functions/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
