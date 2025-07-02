@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { Clock, Users, Star, Camera, Binary as Binoculars, Truck, X, Send, CheckCircle } from 'lucide-react';
+import {
+  Clock,
+  Users,
+  Star,
+  Camera,
+  Binary as Binoculars,
+  Truck,
+  X,
+  Send,
+  CheckCircle,
+} from 'lucide-react';
 
 const Tours = () => {
   const [selectedTour, setSelectedTour] = useState<any>(null);
@@ -11,13 +21,15 @@ const Tours = () => {
     adults: '1',
     children: '0',
     tourDate: '',
-    specialRequests: ''
+    specialRequests: '',
   });
 
-  const handleBookingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleBookingChange = (
+      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     setBookingData({
       ...bookingData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -26,23 +38,46 @@ const Tours = () => {
     setIsModalOpen(true);
   };
 
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Booking submitted:', { tour: selectedTour, booking: bookingData });
-    setIsBookingSubmitted(true);
-    setTimeout(() => {
-      setIsBookingSubmitted(false);
-      setIsModalOpen(false);
-      setBookingData({
-        name: '',
-        email: '',
-        adults: '1',
-        children: '0',
-        tourDate: '',
-        specialRequests: ''
+
+    const payload = {
+      tour_title: selectedTour?.title,
+      ...bookingData,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
       });
-      setSelectedTour(null);
-    }, 3000);
+
+      if (!response.ok) {
+        throw new Error('Failed to send booking email');
+      }
+
+      setIsBookingSubmitted(true);
+
+      setTimeout(() => {
+        setIsBookingSubmitted(false);
+        setIsModalOpen(false);
+        setBookingData({
+          name: '',
+          email: '',
+          adults: '1',
+          children: '0',
+          tourDate: '',
+          specialRequests: '',
+        });
+        setSelectedTour(null);
+      }, 3000);
+    } catch (err) {
+      console.error('Booking submission error:', err);
+      alert('There was an error sending your booking. Please try again later.');
+    }
   };
 
   const closeModal = () => {
@@ -55,7 +90,7 @@ const Tours = () => {
       adults: '1',
       children: '0',
       tourDate: '',
-      specialRequests: ''
+      specialRequests: '',
     });
   };
 
